@@ -1,6 +1,6 @@
 # go-app-grpc-chat-backend
 
-Backend for an example chat application using the `go-app` package and gRPC over WebSockets (like gRPC-Web). See [pojntfx/go-app-grpc-chat-frontend-web](https://github.com/pojntfx/go-app-grpc-chat-frontend-web) for the example backend.
+Backend for an example chat application using the `go-app` package and gRPC over WebSockets (like gRPC-Web). See [pojntfx/go-app-grpc-chat-frontend-web](https://github.com/pojntfx/go-app-grpc-chat-frontend-web) for the example frontend.
 
 ## Overview
 
