@@ -9,6 +9,7 @@ import (
 	proto "github.com/pojntfx/go-app-grpc-chat-backend/pkg/proto/generated"
 	"github.com/pojntfx/go-app-grpc-chat-backend/pkg/services"
 	"github.com/pojntfx/go-app-grpc-chat-backend/pkg/websocketproxy"
+	"github.com/ugjka/messenger"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -33,7 +34,8 @@ func main() {
 	srv := grpc.NewServer()
 	reflection.Register(srv)
 
-	chatService := services.NewChatService()
+	msgr := messenger.New(0, false)
+	chatService := services.NewChatService(msgr)
 	proto.RegisterChatServiceServer(srv, chatService)
 
 	log.Printf("Listening on %v and %v (WebSocket proxy)", *laddr, *wsladdr)
