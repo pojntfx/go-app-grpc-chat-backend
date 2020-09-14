@@ -2,6 +2,8 @@
 
 Backend for an example chat application using the `go-app` package and gRPC over WebSockets (like gRPC-Web). See [pojntfx/go-app-grpc-chat-frontend-web](https://github.com/pojntfx/go-app-grpc-chat-frontend-web) for the example frontend.
 
+![Go CI](https://github.com/pojntfx/go-app-grpc-chat-backend/workflows/Go%20CI/badge.svg)
+
 ## Overview
 
 `go-app-grpc-chat-backend` is a short example showing the use of the [go-app](https://github.com/maxence-charriere/go-app) package and [gRPC](https://grpc.io/). This is the backend, which echoes messages back to the frontend and add's the server's timestamp to them.
