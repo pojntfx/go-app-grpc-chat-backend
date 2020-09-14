@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"sync"
 	"time"
 
 	"github.com/golang/protobuf/ptypes/empty"
@@ -38,6 +39,36 @@ func (s *ChatService) SubscribeToMessages(_ *empty.Empty, stream proto.ChatServi
 			return err
 		}
 	}
+
+	return nil
+}
+
+func (s *ChatService) TransceiveMessages(stream proto.ChatService_TransceiveMessagesServer) error {
+	var wg sync.WaitGroup
+	wg.Add(2)
+
+	go func() {
+		for {
+			message, err := stream.Recv()
+			if err != nil {
+				log.Println("could not receive message from client", err)
+
+				return
+			}
+
+			s.messageChan <- message
+		}
+	}()
+
+	go func() {
+		for message := range s.messageChan {
+			if err := stream.Send(message); err != nil {
+				log.Println("could not send message to client", err)
+			}
+		}
+	}()
+
+	wg.Wait()
 
 	return nil
 }
